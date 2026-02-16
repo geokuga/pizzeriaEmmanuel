@@ -9,7 +9,6 @@ export default function WaveDivider({
   const theme = useTheme();
 
   return (
-   
     <Box
       component="svg"
       viewBox="0 0 1440 120"
@@ -23,14 +22,13 @@ export default function WaveDivider({
         },
         display: "block",
         marginBottom: "-1px",
+        zIndex: 0,
         transform: `${flip ? "rotate(180deg)" : ""} rotate(${rotate}deg)`,
         transformOrigin: "center",
-        ...sx, 
+        ...sx,
       }}
     >
       <path d={theme.customShapes.wave.path} fill={theme.palette[color].main} />
     </Box>
-    
-
   );
 }
