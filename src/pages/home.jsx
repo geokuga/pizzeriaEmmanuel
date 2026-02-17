@@ -1,6 +1,6 @@
 import { Box, Typography, Stack, Divider } from "@mui/material";
 import Section from "../theme/section";
-import Footer from "../components/footer";
+import OrderButtons from "../components/OrderButtons";
 import Header from "../components/header";
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
       <Section bg="background.default" waveBottom>
         <Box
           sx={{
-            minHeight: "40vh",
+            minHeight: "20vh",
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
@@ -38,7 +38,7 @@ export default function Home() {
             <Typography
               sx={{
                 fontFamily: "Oswald, sans-serif",
-                fontSize: { xs: "24px", md: "30px" },
+                fontSize: { xs: "22px", md: "30px" },
                 fontWeight: "bold",
                 letterSpacing: 3,
                 color: "#fff",
@@ -55,7 +55,7 @@ export default function Home() {
           <Typography
             sx={{
               fontFamily: "Archivo Black, sans-serif",
-              fontSize: { xs: "60px", md: "80px" },
+              fontSize: { xs: "55px", md: "80px" },
               fontWeight: "bold",
               lineHeight: 1,
               color: "#ffde59",
@@ -72,7 +72,7 @@ export default function Home() {
               fontWeight: 900,
               letterSpacing: 1,
               color: "#fff",
-              mb: 4,
+              mb: 2,
               textShadow: "2px 2px 0px #ff9300",
             }}
           >
@@ -101,7 +101,7 @@ export default function Home() {
                 width: "100%",
                 maxWidth: { xs: "550px", md: "800px" },
                 position: "relative",
-                mb: "-50px",
+                mb: "-40px",
                 zIndex: 2,
                 filter: "drop-shadow(0px 10px 20px rgba(0,0,0,0.2))",
               }}
@@ -123,7 +123,7 @@ export default function Home() {
       </Section>
 
       <Section bg="secondary.main">
-        <Footer />
+        <OrderButtons />
       </Section>
     </>
   );

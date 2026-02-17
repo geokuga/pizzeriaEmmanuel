@@ -7,7 +7,7 @@ export default function Header() {
       sx={{
         position: "relative",
         backgroundColor: "background.main",
-        minHeight: "8vh",
+        minHeight: "6.8vh",
         overflow: "hidden",
       }}
     >
