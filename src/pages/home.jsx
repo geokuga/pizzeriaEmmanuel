@@ -83,7 +83,7 @@ export default function Home() {
           <Box sx={{ position: "relative", mt: 1, display: "inline-block" }}>
             <Box
               component="img"
-              src="img/destello1.png"
+              src={process.env.PUBLIC_URL + "/img/destello1.png"}
               sx={{
                 position: "absolute",
                 left: { xs: 10, md: -60 },
@@ -95,7 +95,7 @@ export default function Home() {
 
             <Box
               component="img"
-              src="img/logo1.png"
+              src={process.env.PUBLIC_URL + "/img/logo1.png"}
               alt="Pizzas Emmanuel"
               sx={{
                 width: "100%",
@@ -109,7 +109,7 @@ export default function Home() {
 
             <Box
               component="img"
-              src="/img/destello2.png"
+              src={process.env.PUBLIC_URL + "/img/destello2.png"}
               sx={{
                 position: "absolute",
                 right: { xs: 20, md: -60 },
