@@ -2,18 +2,17 @@ import { Box, Typography, Stack, Button, Divider } from "@mui/material";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled"; // Icono para el horario
+import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
+import { Link } from "react-router-dom";
 
 export default function OrderButtons() {
   // Números para llamadas (aleatorios)
-  const numerosLlamadas = ["1234567890", "0987654321", "1122334455"];
+  const numerosLlamadas = ["3336960368", " 3315355511", "3346704677 "];
 
   // NÚMERO FIJO PARA WHATSAPP
-  const numeroWhatsApp = "523312345678";
+  const numeroWhatsApp = "523335989685";
 
-  const mensajeWA = encodeURIComponent(
-    "¡Hola! Me gustaría realizar un pedido de pizza. 🍕",
-  );
+  const mensajeWA = encodeURIComponent("");
 
   const llamarAlAzar = () => {
     const indiceAleatorio = Math.floor(Math.random() * numerosLlamadas.length);
@@ -31,8 +30,8 @@ export default function OrderButtons() {
         {/* Fila superior: Menú y Llamada */}
         <Stack direction="row" spacing={2}>
           <Button
-            component="a"
-            href="/menu"
+            component={Link}
+            to="/menu"
             variant="contained"
             startIcon={<RestaurantMenuIcon />}
             sx={{
@@ -119,7 +118,7 @@ export default function OrderButtons() {
             </Typography>
           </Stack>
 
-          {/* DISEÑO DEL HORARIO */}
+          {/* HORARIO */}
           <Box
             sx={{
               backgroundColor: "rgba(71, 53, 33, 0.1)",
