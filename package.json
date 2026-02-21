@@ -2,7 +2,7 @@
   "name": "pizzeria",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://TU_USUARIO.github.io/pizzeria",
+  "homepage": "https://geokuga.github.io/pizzeriaEmmanuel",
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
