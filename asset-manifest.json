@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/pizzeriaEmmanuel/static/js/main.4e18ce0f.js",
+    "main.js": "/pizzeriaEmmanuel/static/js/main.d1f866c9.js",
     "index.html": "/pizzeriaEmmanuel/index.html",
-    "main.4e18ce0f.js.map": "/pizzeriaEmmanuel/static/js/main.4e18ce0f.js.map"
+    "main.d1f866c9.js.map": "/pizzeriaEmmanuel/static/js/main.d1f866c9.js.map"
   },
   "entrypoints": [
-    "static/js/main.4e18ce0f.js"
+    "static/js/main.d1f866c9.js"
   ]
 }
