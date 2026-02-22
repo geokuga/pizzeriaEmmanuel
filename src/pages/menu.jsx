@@ -2,9 +2,10 @@ import { Box, Typography, Container, Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import Section from "../theme/section";
 import Header from "../components/HeaderMenu";
-import WhatsAppFab from "../components/WhatsAppFab"; // <-- Importamos el nuevo componente
+import WhatsAppFab from "../components/WhatsAppFab";
+import Footer from "../components/Footer";
 
-// Componente de Botón que redirige a otras páginas
+// Componente de Botón responsivo
 export const NavButton = ({ label, to }) => (
   <Button
     component={Link}
@@ -17,7 +18,12 @@ export const NavButton = ({ label, to }) => (
       fontFamily: "Oswald, sans-serif",
       fontWeight: "bold",
       borderRadius: "20px",
-      px: 3,
+      px: { xs: 1.5, sm: 3 },
+      fontSize: { xs: "0.7rem", sm: "0.85rem", md: "1rem" },
+      whiteSpace: "nowrap",
+      minWidth: "auto",
+      flex: "1 1 auto",
+      maxWidth: { xs: "130px", sm: "200px" },
       transition: "all 0.3s ease",
       "&:hover": {
         backgroundColor: "#fff",
@@ -107,7 +113,8 @@ export const SectionTitle = ({ children }) => (
 
 export default function Menu() {
   return (
-    <Section bg="background.default" waveBottom>
+    /* Quitamos waveBottom aquí para que no interfiera con el Footer */
+    <Section bg="background.default">
       <Box
         sx={{
           minHeight: "100vh",
@@ -116,7 +123,7 @@ export default function Menu() {
           flexDirection: "column",
           alignItems: "center",
           pt: 4,
-          pb: 12,
+          pb: 2, // Reducimos el padding inferior para que el footer se pegue más
           backgroundImage: `
             radial-gradient(circle at 10% 20%, rgba(244, 121, 32, 0.4) 0%, transparent 40%),
             radial-gradient(circle at 90% 50%, rgba(244, 121, 32, 0.4) 0%, transparent 40%)
@@ -144,6 +151,7 @@ export default function Menu() {
             textAlign: "center",
             position: "relative",
             zIndex: 10,
+            mt: 4, // Añadimos un poco de margen superior por el header
             mb: 2.5,
             textShadow: "4px 4px 0px rgba(0,0,0,0.15)",
           }}
@@ -157,9 +165,12 @@ export default function Menu() {
           sx={{
             zIndex: 10,
             mb: 4,
+            width: "95%",
+            maxWidth: "500px",
             flexWrap: "wrap",
             justifyContent: "center",
-            gap: 1,
+            alignItems: "center",
+            gap: 1.5,
           }}
         >
           <NavButton label="PIZZAS" to="/pizzas" />
@@ -169,7 +180,7 @@ export default function Menu() {
 
         <Container
           maxWidth="xs"
-          sx={{ zIndex: 5, px: 3, position: "relative" }}
+          sx={{ zIndex: 5, px: 3, position: "relative", mb: 5 }}
         >
           <SectionTitle>PIZZAS</SectionTitle>
           <MenuRow nombre="Mini" precio="70" />
@@ -224,9 +235,10 @@ export default function Menu() {
           />
         </Container>
 
-        {/* --- BOTÓN FLOTANTE DE WHATSAPP --- */}
         <WhatsAppFab />
       </Box>
+      {/* El Footer va fuera del Box del contenido principal para que use todo el ancho */}
+      <Footer />
     </Section>
   );
 }
