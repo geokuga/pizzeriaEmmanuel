@@ -176,6 +176,7 @@ export default function Menu() {
           <NavButton label="PIZZAS" to="/pizzas" />
           <NavButton label="HAMBURGUESAS" to="/hamburguesas" />
           <NavButton label="ALITAS" to="/alitas" />
+          <NavButton label="PROMOCIONES" to="/promociones" />
         </Stack>
 
         <Container

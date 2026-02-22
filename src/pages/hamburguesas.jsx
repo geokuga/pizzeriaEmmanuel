@@ -1,69 +1,198 @@
-import { Box, Typography, Container, Stack } from "@mui/material";
+import React from "react";
+import { Box, Typography, Container, Stack, Paper } from "@mui/material";
 import Section from "../theme/section";
 import Header from "../components/HeaderMenu";
 import WhatsAppFab from "../components/WhatsAppFab";
-import { NavButton, CategoryImage, MenuRow, SectionTitle } from "./menu";
-// ^ Nota: Si exportaste los componentes desde menu.jsx, los puedes importar así.
-// Si no, simplemente cópialos de nuevo en cada archivo.
+import Footer from "../components/Footer";
+import { NavButton } from "./menu";
 
-export default function AlitasPage() {
+// Componente para mostrar el producto e ingredientes de forma directa
+const MenuDetalle = ({ nombre, ingredientes }) => (
+  <Box sx={{ mb: 3 }}>
+    <Typography
+      sx={{
+        fontFamily: "Archivo Black, sans-serif",
+        fontSize: "1.2rem",
+        color: "#000",
+        textTransform: "uppercase",
+      }}
+    >
+      {nombre}
+    </Typography>
+    {ingredientes && (
+      <Typography
+        sx={{
+          fontFamily: "Roboto, sans-serif",
+          fontSize: "1rem",
+          color: "#333",
+          mt: 0.5,
+          pl: 1,
+          fontStyle: "italic",
+        }}
+      >
+        {ingredientes}
+      </Typography>
+    )}
+  </Box>
+);
+
+const StyledSubtitle = ({ children }) => (
+  <Box sx={{ mb: 3, mt: 2 }}>
+    <Typography
+      sx={{
+        fontFamily: "Archivo Black, sans-serif",
+        fontSize: "1.5rem",
+        color: "#f47920",
+        textTransform: "uppercase",
+        display: "flex",
+        alignItems: "center",
+        "&::after": {
+          content: '""',
+          flex: 1,
+          height: "3px",
+          bgcolor: "rgba(244, 121, 32, 0.2)",
+          ml: 2,
+          borderRadius: "10px",
+        },
+      }}
+    >
+      {children}
+    </Typography>
+  </Box>
+);
+
+export default function HamburguesasPage() {
+  const baseRoute = process.env.PUBLIC_URL || "";
+  const imagenHamburguesa = `${baseRoute}/img/hamburguesas1.jpeg`;
+
   return (
-    <Section bg="background.default" waveBottom>
+    <Section bg="#fcc99f">
       <Box
         sx={{
           minHeight: "100vh",
-          position: "relative",
-          pt: 4,
-          pb: 12,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          backgroundImage: `radial-gradient(circle at 90% 10%, rgba(244, 121, 32, 0.4) 0%, transparent 40%)`,
+          position: "relative",
+          overflowX: "hidden",
+          backgroundImage: `linear-gradient(180deg, rgba(244, 121, 32, 0.15) 0%, #fd7200 100%)`,
         }}
       >
-        <Box
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            zIndex: 1,
-          }}
-        >
+        <Box sx={{ width: "100%", zIndex: 30 }}>
           <Header />
         </Box>
 
-        <Typography
-          sx={{
-            fontFamily: "Archivo Black, sans-serif",
-            fontSize: { xs: "50px", md: "70px" },
-            color: "#fff",
-            WebkitTextStroke: "1.5px #000",
-            textAlign: "center",
-            mt: 6,
-            mb: 2,
-          }}
-        >
-          ALITAS
-        </Typography>
+        <Box sx={{ flex: 1, width: "100%", pt: { xs: 8, md: 10 }, pb: 10 }}>
+          <Container maxWidth="md">
+            {/* TÍTULO AJUSTADO CON SALTO DE LÍNEA */}
+            <Box
+              sx={{
+                textAlign: "center",
+                mb: 6,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                minHeight: { xs: "150px", md: "200px" }, // Aumentado para acomodar 2 líneas
+              }}
+            >
+              <Typography
+                sx={{
+                  fontFamily: "Archivo Black, sans-serif",
+                  fontSize: "clamp(35px, 8vw, 70px)", // Ajustado ligeramente para balancear
+                  color: "#ff6a00",
+                  lineHeight: 1.1,
+                  textAlign: "center",
+                  textShadow: "4px 4px 0px #fff, 0px 10px 20px rgba(0,0,0,0.2)",
+                  mb: 3,
+                }}
+              >
+                HAMBURGUESAS <br /> Y PAPAS
+              </Typography>
+              <NavButton label="VOLVER AL MENÚ" to="/menu" />
+            </Box>
 
-        {/* Navegación interna para volver o cambiar de submenú */}
-        <Stack direction="row" spacing={1} sx={{ zIndex: 10, mb: 4 }}>
-          <NavButton label="VOLVER AL MENÚ" to="/menu" />
-        </Stack>
+            <Stack spacing={4} sx={{ position: "relative", zIndex: 10 }}>
+              <Paper
+                elevation={0}
+                sx={{
+                  p: 4,
+                  borderRadius: "24px",
+                  bgcolor: "#fff",
+                  border: "2px solid #f47920",
+                }}
+              >
+                <StyledSubtitle>NUESTRAS HAMBURGUESAS</StyledSubtitle>
+                <MenuDetalle
+                  nombre="Hamburguesa con papas"
+                  ingredientes="Pan (Bimbollo super), carne de res, lechuga, cebolla, queso amarillo, jitomate. Aderezos: cátsup, mayonesa y mostaza."
+                />
+                <MenuDetalle
+                  nombre="Hamburguesa de Pollo"
+                  ingredientes="Pan, carne de pollo (tipo nuggets), lechuga, cebolla, jitomate. Aderezos: cátsup, mayonesa y mostaza."
+                />
+                <Typography
+                  sx={{
+                    fontFamily: "Archivo Black, sans-serif",
+                    fontSize: "0.9rem",
+                    textAlign: "center",
+                    mt: 2,
+                    color: "#f47920",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  * TODAS VAN ACOMPAÑADAS DE PAPAS A LA FRANCESA
+                </Typography>
+              </Paper>
 
-        <Container maxWidth="xs" sx={{ zIndex: 5, px: 3 }}>
-          <SectionTitle>NUESTRAS ALITAS</SectionTitle>
-          <MenuRow nombre="Orden (chica)" precio="100" />
-          <MenuRow nombre="Orden (grande)" precio="180" />
-          <MenuRow nombre="Orden (familiar)" precio="230" />
+              <Paper
+                elevation={0}
+                sx={{ p: 4, borderRadius: "24px", bgcolor: "#fff" }}
+              >
+                <StyledSubtitle>PAPAS Y SNACKS</StyledSubtitle>
+                <MenuDetalle nombre="Papas a la francesa" />
+                <MenuDetalle
+                  nombre="Papas con carne y queso"
+                  ingredientes="Opciones de carne: Adobada, bistec o chorizo."
+                />
+                <MenuDetalle nombre="Papas con queso" />
+                <MenuDetalle nombre="Papas Gajo" />
+                <MenuDetalle nombre="Nuggets (10 pz)" />
+              </Paper>
 
-          <CategoryImage
-            src="https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=800"
-            alt="Alitas Especiales"
-          />
-        </Container>
+              <Box
+                sx={{ display: "flex", justifyContent: "center", mt: 2, px: 1 }}
+              >
+                <Box
+                  sx={{
+                    width: "100%",
+                    maxWidth: "600px",
+                    height: { xs: "280px", sm: "400px" },
+                    borderRadius: "24px",
+                    overflow: "hidden",
+                    boxShadow: "0px 15px 35px rgba(0, 0, 0, 0.2)",
+                    border: "6px solid #fff",
+                  }}
+                >
+                  <img
+                    src={imagenHamburguesa}
+                    alt="Hamburguesas"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                    onError={(e) => {
+                      e.target.src = "img/hamburguesas1.jpeg";
+                    }}
+                  />
+                </Box>
+              </Box>
+            </Stack>
+          </Container>
+        </Box>
 
+        <Footer />
         <WhatsAppFab />
       </Box>
     </Section>

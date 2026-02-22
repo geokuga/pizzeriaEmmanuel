@@ -77,7 +77,7 @@ export default function AlitasPage() {
                 textAlign: "center",
                 mb: 4,
                 position: "relative",
-                zIndex: 5,
+                zIndex: 100,
               }}
             >
               <Typography
