@@ -5,6 +5,7 @@ import Pizzas from "./pages/pizzas";
 import Hamburguesas from "./pages/hamburguesas";
 import Alitas from "./pages/alitas";
 import Promociones from "./pages/promociones";
+import Toritos from "./pages/toritos";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/hamburguesas" element={<Hamburguesas />} />
         <Route path="/alitas" element={<Alitas />} />
         <Route path="/promociones" element={<Promociones />} />
+        <Route path="/toritos" element={<Toritos />} />
         <Route path="*" element={<Home />} />
       </Routes>
     </Router>

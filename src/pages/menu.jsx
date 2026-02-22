@@ -5,7 +5,53 @@ import Header from "../components/HeaderMenu";
 import WhatsAppFab from "../components/WhatsAppFab";
 import Footer from "../components/Footer";
 
-// Componente de Botón responsivo
+// Componente para manejar Imágenes o Videos dinámicamente
+const MediaContent = ({ src, alt }) => {
+  const baseRoute = process.env.PUBLIC_URL || "";
+  const fullPath = `${baseRoute}${src}`;
+  const isVideo = src.toLowerCase().endsWith(".mp4");
+
+  return (
+    <Box
+      sx={{
+        width: "100%",
+        mt: 3,
+        mb: 2,
+        borderRadius: "16px",
+        overflow: "hidden",
+        boxShadow: "0px 10px 25px rgba(0,0,0,0.4)",
+        border: "3px solid #fff",
+        position: "relative",
+        lineHeight: 0,
+        bgcolor: "#000",
+      }}
+    >
+      {isVideo ? (
+        <Box
+          component="video"
+          src={fullPath}
+          autoPlay
+          loop
+          muted
+          playsInline
+          sx={{ width: "100%", display: "block" }}
+        />
+      ) : (
+        <Box
+          component="img"
+          src={fullPath}
+          alt={alt}
+          sx={{ width: "100%", height: "auto", display: "block" }}
+          onError={(e) => {
+            e.target.src =
+              "https://via.placeholder.com/400x300?text=Emmanuel+Pizza";
+          }}
+        />
+      )}
+    </Box>
+  );
+};
+
 export const NavButton = ({ label, to }) => (
   <Button
     component={Link}
@@ -15,7 +61,7 @@ export const NavButton = ({ label, to }) => (
       backdropFilter: "blur(5px)",
       border: "1px solid #fff",
       color: "#fff",
-      fontFamily: "Oswald, sans-serif",
+      fontFamily: "Archivo Black, sans-serif",
       fontWeight: "bold",
       borderRadius: "20px",
       px: { xs: 1.5, sm: 3 },
@@ -36,36 +82,12 @@ export const NavButton = ({ label, to }) => (
   </Button>
 );
 
-export const CategoryImage = ({ src, alt }) => (
-  <Box
-    sx={{
-      width: "100%",
-      mt: 3,
-      mb: 2,
-      borderRadius: "16px",
-      overflow: "hidden",
-      boxShadow: "0px 10px 25px rgba(0,0,0,0.4)",
-      border: "3px solid #fff",
-      position: "relative",
-      lineHeight: 0,
-    }}
-  >
-    <Box
-      component="img"
-      src={src}
-      alt={alt}
-      sx={{ width: "100%", height: "auto", display: "block" }}
-    />
-  </Box>
-);
-
 export const MenuRow = ({ nombre, precio }) => (
   <Box sx={{ display: "flex", alignItems: "baseline", mb: 0.8 }}>
     <Typography
       sx={{
-        fontFamily: "Oswald, sans-serif",
-        fontWeight: "bold",
-        fontSize: "1rem",
+        fontFamily: "Archivo Black, sans-serif",
+        fontSize: "0.9rem",
         color: "#fff",
         textTransform: "uppercase",
         textShadow: "1px 1px 3px rgba(0,0,0,0.5)",
@@ -82,13 +104,12 @@ export const MenuRow = ({ nombre, precio }) => (
     />
     <Typography
       sx={{
-        fontFamily: "Oswald, sans-serif",
-        fontWeight: "bold",
+        fontFamily: "Archivo Black, sans-serif",
         fontSize: "1.1rem",
         color: "#fff",
       }}
     >
-      ${precio}
+      {precio === "-" ? "-" : `$${precio}`}
     </Typography>
   </Box>
 );
@@ -113,7 +134,6 @@ export const SectionTitle = ({ children }) => (
 
 export default function Menu() {
   return (
-    /* Quitamos waveBottom aquí para que no interfiera con el Footer */
     <Section bg="background.default">
       <Box
         sx={{
@@ -123,22 +143,14 @@ export default function Menu() {
           flexDirection: "column",
           alignItems: "center",
           pt: 4,
-          pb: 2, // Reducimos el padding inferior para que el footer se pegue más
+          pb: 2,
           backgroundImage: `
             radial-gradient(circle at 10% 20%, rgba(244, 121, 32, 0.4) 0%, transparent 40%),
             radial-gradient(circle at 90% 50%, rgba(244, 121, 32, 0.4) 0%, transparent 40%)
           `,
         }}
       >
-        <Box
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            zIndex: 1,
-          }}
-        >
+        <Box sx={{ width: "100%", zIndex: 1 }}>
           <Header />
         </Box>
 
@@ -151,7 +163,7 @@ export default function Menu() {
             textAlign: "center",
             position: "relative",
             zIndex: 10,
-            mt: 4, // Añadimos un poco de margen superior por el header
+            mt: 4,
             mb: 2.5,
             textShadow: "4px 4px 0px rgba(0,0,0,0.15)",
           }}
@@ -166,7 +178,7 @@ export default function Menu() {
             zIndex: 10,
             mb: 4,
             width: "95%",
-            maxWidth: "500px",
+            maxWidth: "600px",
             flexWrap: "wrap",
             justifyContent: "center",
             alignItems: "center",
@@ -177,6 +189,7 @@ export default function Menu() {
           <NavButton label="HAMBURGUESAS" to="/hamburguesas" />
           <NavButton label="ALITAS" to="/alitas" />
           <NavButton label="PROMOCIONES" to="/promociones" />
+          <NavButton label="TORITOS..." to="/toritos" />
         </Stack>
 
         <Container
@@ -191,10 +204,8 @@ export default function Menu() {
           <MenuRow nombre="Familiar" precio="190" />
           <MenuRow nombre="Olímpica" precio="215" />
           <MenuRow nombre="Cuadrada" precio="230" />
-          <CategoryImage
-            src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800"
-            alt="Pizza"
-          />
+          {/* USANDO VIDEO PARA PIZZAS */}
+          <MediaContent src="/img/pizzas1.jpeg" alt="Pizzas Emmanuel" />
 
           <SectionTitle>EXTRAS</SectionTitle>
           <MenuRow nombre="Cinché (Calzone)" precio="110" />
@@ -205,40 +216,28 @@ export default function Menu() {
           <MenuRow nombre="Sincronizada" precio="50" />
           <MenuRow nombre="Gringas" precio="55" />
           <MenuRow nombre="Papas c/ carne" precio="80" />
-          <MenuRow nombre="Carne extra" precio="20" />
-          <MenuRow nombre="Queso crema" precio="20" />
-          <CategoryImage
-            src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800"
-            alt="Burger"
+          {/* USANDO IMAGEN PARA HAMBURGUESAS */}
+          <MediaContent
+            src="/img/hamburguesas1.jpeg"
+            alt="Hamburguesas y snacks"
           />
 
           <SectionTitle>ALITAS</SectionTitle>
           <MenuRow nombre="Orden (Chica)" precio="100" />
           <MenuRow nombre="Orden (Grande)" precio="180" />
           <MenuRow nombre="Orden (Familiar)" precio="230" />
-          <CategoryImage
-            src="https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=800"
-            alt="Alitas"
-          />
+          <MediaContent src="/img/alitas3.jpeg" alt="Alitas" />
 
           <SectionTitle>BEBIDAS</SectionTitle>
           <MenuRow nombre="Agua Natural 1 LT" precio="25" />
           <MenuRow nombre="Agua Sabor" precio="30" />
-          <MenuRow nombre="Refresco Tapa R. y Lata" precio="25" />
-          <MenuRow nombre="Refresco 500 ML Ret." precio="20" />
+          <MenuRow nombre="Refresco Lata" precio="25" />
           <MenuRow nombre="Coca 2 LT" precio="45" />
-          <MenuRow nombre="Sabores 1.5 LT" precio="30" />
-          <MenuRow nombre="Café" precio="-" />
-
-          <CategoryImage
-            src={`${process.env.PUBLIC_URL}/img/aguasFrescas.png`}
-            alt="Bebidas"
-          />
+          <MediaContent src="/img/aguasFrescas.png" alt="Bebidas" />
         </Container>
 
         <WhatsAppFab />
       </Box>
-      {/* El Footer va fuera del Box del contenido principal para que use todo el ancho */}
       <Footer />
     </Section>
   );

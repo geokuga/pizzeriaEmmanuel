@@ -6,7 +6,7 @@ import WhatsAppFab from "../components/WhatsAppFab";
 import Footer from "../components/Footer";
 import { NavButton } from "./menu";
 
-// Componente para mostrar el producto e ingredientes de forma directa
+// Componente para mostrar el producto e ingredientes
 const MenuDetalle = ({ nombre, ingredientes }) => (
   <Box sx={{ mb: 3 }}>
     <Typography
@@ -61,9 +61,9 @@ const StyledSubtitle = ({ children }) => (
   </Box>
 );
 
-export default function HamburguesasPage() {
+export default function ToritosPage() {
   const baseRoute = process.env.PUBLIC_URL || "";
-  const imagenHamburguesa = `${baseRoute}/img/hamburguesas1.jpeg`;
+  const imagenToritos = `${baseRoute}/img/toritos1.jpeg`;
 
   return (
     <Section bg="#fcc99f">
@@ -84,7 +84,7 @@ export default function HamburguesasPage() {
 
         <Box sx={{ flex: 1, width: "100%", pt: { xs: 8, md: 10 }, pb: 10 }}>
           <Container maxWidth="md">
-            {/* TÍTULO AJUSTADO CON SALTO DE LÍNEA */}
+            {/* TÍTULO CON SALTO DE LÍNEA */}
             <Box
               sx={{
                 textAlign: "center",
@@ -93,13 +93,13 @@ export default function HamburguesasPage() {
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
-                minHeight: { xs: "150px", md: "200px" }, // Aumentado para acomodar 2 líneas
+                minHeight: { xs: "150px", md: "200px" },
               }}
             >
               <Typography
                 sx={{
                   fontFamily: "Archivo Black, sans-serif",
-                  fontSize: "clamp(35px, 8vw, 70px)", // Ajustado ligeramente para balancear
+                  fontSize: "clamp(35px, 9vw, 75px)",
                   color: "#ff6a00",
                   lineHeight: 1.1,
                   textAlign: "center",
@@ -107,12 +107,13 @@ export default function HamburguesasPage() {
                   mb: 3,
                 }}
               >
-                HAMBURGUESAS <br /> Y PAPAS
+                TORITOS <br /> Y MÁS
               </Typography>
               <NavButton label="VOLVER AL MENÚ" to="/menu" />
             </Box>
 
             <Stack spacing={4} sx={{ position: "relative", zIndex: 10 }}>
+              {/* SECCIÓN TORITOS Y GRINGAS */}
               <Paper
                 elevation={0}
                 sx={{
@@ -122,44 +123,25 @@ export default function HamburguesasPage() {
                   border: "2px solid #f47920",
                 }}
               >
-                <StyledSubtitle>HAMBURGUESAS</StyledSubtitle>
+                <StyledSubtitle>ESPECIALIDADES EN HARINA</StyledSubtitle>
+
                 <MenuDetalle
-                  nombre="Hamburguesa de res"
-                  ingredientes="Pan (Bimbollo super), carne de res, lechuga, cebolla, queso amarillo, jitomate. Aderezos: cátsup, mayonesa y mostaza."
+                  nombre="Toritos"
+                  ingredientes="Tortilla de harina, queso, carne a elegir (chorizo, adobada o bistec), queso gratinado, salsa de tomate, cilantro y cebolla."
                 />
+
                 <MenuDetalle
-                  nombre="Hamburguesa de Pollo"
-                  ingredientes="Pan, carne de pollo (tipo nuggets), lechuga, cebolla, jitomate. Aderezos: cátsup, mayonesa y mostaza."
+                  nombre="Gringas"
+                  ingredientes="Tortilla de harina, queso, carne a elegir (chorizo, adobada o bistec), queso gratinado, salsa de tomate, cilantro y cebolla."
                 />
-                <Typography
-                  sx={{
-                    fontFamily: "Archivo Black, sans-serif",
-                    fontSize: "0.9rem",
-                    textAlign: "center",
-                    mt: 2,
-                    color: "#f47920",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  * TODAS VAN ACOMPAÑADAS DE PAPAS A LA FRANCESA
-                </Typography>
+
+                <MenuDetalle
+                  nombre="Sincronizadas"
+                  ingredientes="Jamón y queso, acompañadas de lechuga, jitomate y cebolla."
+                />
               </Paper>
 
-              <Paper
-                elevation={0}
-                sx={{ p: 4, borderRadius: "24px", bgcolor: "#fff" }}
-              >
-                <StyledSubtitle>PAPAS Y SNACKS</StyledSubtitle>
-                <MenuDetalle nombre="Papas a la francesa" />
-                <MenuDetalle
-                  nombre="Papas con carne y queso"
-                  ingredientes="Opciones de carne: Adobada, bistec o chorizo."
-                />
-                <MenuDetalle nombre="Papas con queso" />
-                <MenuDetalle nombre="Papas Gajo" />
-                <MenuDetalle nombre="Nuggets (10 pz)" />
-              </Paper>
-
+              {/* IMAGEN DEL PRODUCTO */}
               <Box
                 sx={{ display: "flex", justifyContent: "center", mt: 2, px: 1 }}
               >
@@ -175,15 +157,15 @@ export default function HamburguesasPage() {
                   }}
                 >
                   <img
-                    src={imagenHamburguesa}
-                    alt="Hamburguesas"
+                    src={imagenToritos}
+                    alt="Toritos Emmanuel"
                     style={{
                       width: "100%",
                       height: "100%",
                       objectFit: "cover",
                     }}
                     onError={(e) => {
-                      e.target.src = "img/hamburguesas1.jpeg";
+                      e.target.src = "img/toritos1.jpeg";
                     }}
                   />
                 </Box>
