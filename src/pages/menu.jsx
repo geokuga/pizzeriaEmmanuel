@@ -1,10 +1,11 @@
 import { Box, Typography, Container, Button, Stack } from "@mui/material";
-import { Link } from "react-router-dom"; // Importante instalar react-router-dom
+import { Link } from "react-router-dom";
 import Section from "../theme/section";
 import Header from "../components/HeaderMenu";
+import WhatsAppFab from "../components/WhatsAppFab"; // <-- Importamos el nuevo componente
 
 // Componente de Botón que redirige a otras páginas
-const NavButton = ({ label, to }) => (
+export const NavButton = ({ label, to }) => (
   <Button
     component={Link}
     to={to}
@@ -29,7 +30,7 @@ const NavButton = ({ label, to }) => (
   </Button>
 );
 
-const CategoryImage = ({ src, alt }) => (
+export const CategoryImage = ({ src, alt }) => (
   <Box
     sx={{
       width: "100%",
@@ -52,7 +53,7 @@ const CategoryImage = ({ src, alt }) => (
   </Box>
 );
 
-const MenuRow = ({ nombre, precio }) => (
+export const MenuRow = ({ nombre, precio }) => (
   <Box sx={{ display: "flex", alignItems: "baseline", mb: 0.8 }}>
     <Typography
       sx={{
@@ -86,7 +87,7 @@ const MenuRow = ({ nombre, precio }) => (
   </Box>
 );
 
-const SectionTitle = ({ children }) => (
+export const SectionTitle = ({ children }) => (
   <Typography
     sx={{
       fontFamily: "Archivo Black, sans-serif",
@@ -150,7 +151,6 @@ export default function Menu() {
           MENÚ
         </Typography>
 
-        {/* --- BOTONES DE NAVEGACIÓN A OTRAS PÁGINAS --- */}
         <Stack
           direction="row"
           spacing={1}
@@ -200,7 +200,6 @@ export default function Menu() {
             alt="Burger"
           />
 
-          {/* --- SECCIÓN ALITAS (Basada en tu imagen) --- */}
           <SectionTitle>ALITAS</SectionTitle>
           <MenuRow nombre="Orden (Chica)" precio="100" />
           <MenuRow nombre="Orden (Grande)" precio="180" />
@@ -219,8 +218,14 @@ export default function Menu() {
           <MenuRow nombre="Sabores 1.5 LT" precio="30" />
           <MenuRow nombre="Café" precio="-" />
 
-          <CategoryImage src="/img/aguasFrescas.png" alt="Bebidas" />
+          <CategoryImage
+            src={`${process.env.PUBLIC_URL}/img/aguasFrescas.png`}
+            alt="Bebidas"
+          />
         </Container>
+
+        {/* --- BOTÓN FLOTANTE DE WHATSAPP --- */}
+        <WhatsAppFab />
       </Box>
     </Section>
   );
