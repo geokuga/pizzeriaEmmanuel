@@ -1,3 +1,4 @@
+import React from "react";
 import { Box, Typography, Container, Button, Stack } from "@mui/material";
 import { Link } from "react-router-dom";
 import Section from "../theme/section";
@@ -7,8 +8,9 @@ import Footer from "../components/Footer";
 
 // Componente para manejar Imágenes o Videos dinámicamente
 const MediaContent = ({ src, alt }) => {
+  const cleanSrc = src.startsWith("/") ? src.substring(1) : src;
   const baseRoute = process.env.PUBLIC_URL || "";
-  const fullPath = `${baseRoute}${src}`;
+  const fullPath = `${baseRoute}/${cleanSrc}`;
   const isVideo = src.toLowerCase().endsWith(".mp4");
 
   return (
@@ -109,7 +111,11 @@ export const MenuRow = ({ nombre, precio }) => (
         color: "#fff",
       }}
     >
-      {precio === "-" ? "-" : `$${precio}`}
+      {precio === "-"
+        ? "-"
+        : precio.toString().startsWith("$")
+          ? precio
+          : `$${precio}`}
     </Typography>
   </Box>
 );
@@ -189,7 +195,7 @@ export default function Menu() {
           <NavButton label="HAMBURGUESAS" to="/hamburguesas" />
           <NavButton label="ALITAS" to="/alitas" />
           <NavButton label="PROMOCIONES" to="/promociones" />
-          <NavButton label="TORITOS..." to="/toritos" />
+          <NavButton label="TORITOS" to="/toritos" />
         </Stack>
 
         <Container
@@ -204,8 +210,7 @@ export default function Menu() {
           <MenuRow nombre="Familiar" precio="190" />
           <MenuRow nombre="Olímpica" precio="215" />
           <MenuRow nombre="Cuadrada" precio="230" />
-          {/* USANDO VIDEO PARA PIZZAS */}
-          <MediaContent src="/img/pizzas1.jpeg" alt="Pizzas Emmanuel" />
+          <MediaContent src="img/pizzas1.jpeg" alt="Pizzas Emmanuel" />
 
           <SectionTitle>EXTRAS</SectionTitle>
           <MenuRow nombre="Cinché (Calzone)" precio="110" />
@@ -216,9 +221,8 @@ export default function Menu() {
           <MenuRow nombre="Sincronizada" precio="50" />
           <MenuRow nombre="Gringas" precio="55" />
           <MenuRow nombre="Papas c/ carne" precio="80" />
-          {/* USANDO IMAGEN PARA HAMBURGUESAS */}
           <MediaContent
-            src="/img/hamburguesas1.jpeg"
+            src="img/hamburguesas1.jpeg"
             alt="Hamburguesas y snacks"
           />
 
@@ -226,14 +230,18 @@ export default function Menu() {
           <MenuRow nombre="Orden (Chica)" precio="100" />
           <MenuRow nombre="Orden (Grande)" precio="180" />
           <MenuRow nombre="Orden (Familiar)" precio="230" />
-          <MediaContent src="/img/alitas3.jpeg" alt="Alitas" />
+          {/* Mantenemos la 'A' mayúscula para Hostinger */}
+          <MediaContent src="img/Alitas3.jpeg" alt="Alitas Emmanuel" />
 
           <SectionTitle>BEBIDAS</SectionTitle>
           <MenuRow nombre="Agua Natural 1 LT" precio="25" />
           <MenuRow nombre="Agua Sabor" precio="30" />
-          <MenuRow nombre="Refresco Lata" precio="25" />
+          <MenuRow nombre="Refresco Tapa R. y Lata" precio="25" />
+          <MenuRow nombre="Refresco 500 ML Ret." precio="20" />
           <MenuRow nombre="Coca 2 LT" precio="45" />
-          <MediaContent src="/img/aguasFrescas.png" alt="Bebidas" />
+          <MenuRow nombre="Sabores 1.5 LT" precio="30" />
+          <MenuRow nombre="Café" precio="-" />
+          <MediaContent src="img/aguasFrescas.png" alt="Bebidas" />
         </Container>
 
         <WhatsAppFab />
