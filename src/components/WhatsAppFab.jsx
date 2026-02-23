@@ -2,7 +2,7 @@ import { Fab, Zoom } from "@mui/material";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp"; // Necesitas instalar @mui/icons-material
 
 const WhatsAppFab = () => {
-  const phoneNumber = "521234567890"; // Reemplaza con tu número real (código de país + número)
+  const phoneNumber = "523335989685"; // Reemplaza con tu número real (código de país + número)
   const message = "¡Hola! Me gustaría hacer un pedido.";
   const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 

@@ -6,7 +6,6 @@ import WhatsAppFab from "../components/WhatsAppFab";
 import Footer from "../components/Footer";
 import { NavButton } from "./menu";
 
-// Componente para mostrar el producto e ingredientes
 const MenuDetalle = ({ nombre, ingredientes }) => (
   <Box sx={{ mb: 3 }}>
     <Typography
@@ -61,9 +60,42 @@ const StyledSubtitle = ({ children }) => (
   </Box>
 );
 
+// Componente para las imágenes grandes con el estilo de marco original
+const LargeMediaFrame = ({ src, alt }) => (
+  <Box
+    sx={{
+      width: "100%",
+      maxWidth: "800px", // Aumentado para que ocupe más ancho
+      height: { xs: "280px", sm: "450px" },
+      borderRadius: "24px",
+      overflow: "hidden",
+      boxShadow: "0px 15px 35px rgba(0, 0, 0, 0.3)",
+      border: "6px solid #fff",
+      mb: 4, // Espacio entre imágenes
+      mx: "auto",
+    }}
+  >
+    <img
+      src={src}
+      alt={alt}
+      style={{
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+      }}
+      onError={(e) => {
+        e.target.src =
+          "https://via.placeholder.com/600x400?text=Emmanuel+Pizza";
+      }}
+    />
+  </Box>
+);
+
 export default function ToritosPage() {
   const baseRoute = process.env.PUBLIC_URL || "";
-  const imagenToritos = `${baseRoute}/img/toritos1.jpeg`;
+  // Definimos las rutas según tu carpeta img
+  const img1 = `${baseRoute}/img/toritos1.jpeg`;
+  const img2 = `${baseRoute}/img/toritos2.jpeg`;
 
   return (
     <Section bg="#fcc99f">
@@ -84,7 +116,6 @@ export default function ToritosPage() {
 
         <Box sx={{ flex: 1, width: "100%", pt: { xs: 8, md: 10 }, pb: 10 }}>
           <Container maxWidth="md">
-            {/* TÍTULO CON SALTO DE LÍNEA */}
             <Box
               sx={{
                 textAlign: "center",
@@ -113,7 +144,6 @@ export default function ToritosPage() {
             </Box>
 
             <Stack spacing={4} sx={{ position: "relative", zIndex: 10 }}>
-              {/* SECCIÓN TORITOS Y GRINGAS */}
               <Paper
                 elevation={0}
                 sx={{
@@ -121,54 +151,31 @@ export default function ToritosPage() {
                   borderRadius: "24px",
                   bgcolor: "#fff",
                   border: "2px solid #f47920",
+                  mb: 2,
                 }}
               >
                 <StyledSubtitle>ESPECIALIDADES EN HARINA</StyledSubtitle>
 
                 <MenuDetalle
                   nombre="Toritos"
-                  ingredientes="Tortilla de harina, queso, carne a elegir (chorizo, adobada o bistec), queso gratinado, salsa de tomate, cilantro y cebolla."
+                  ingredientes="Tortilla de harina, carne a elegir (chorizo, adobada o bistec), queso gratinado, salsa de tomate, cilantro y cebolla."
                 />
 
                 <MenuDetalle
                   nombre="Gringas"
-                  ingredientes="Tortilla de harina, queso, carne a elegir (chorizo, adobada o bistec), queso gratinado, salsa de tomate, cilantro y cebolla."
+                  ingredientes="Tortilla de harina, carne a elegir (chorizo, adobada o bistec), queso gratinado, salsa de tomate, cilantro y cebolla."
                 />
 
                 <MenuDetalle
                   nombre="Sincronizadas"
-                  ingredientes="Jamón y queso, acompañadas de lechuga, jitomate y cebolla."
+                  ingredientes="Jamón y queso, acompañadas de lechuga, jitomate, cebolla, cátsup, mayonesa y mostaza."
                 />
               </Paper>
 
-              {/* IMAGEN DEL PRODUCTO */}
-              <Box
-                sx={{ display: "flex", justifyContent: "center", mt: 2, px: 1 }}
-              >
-                <Box
-                  sx={{
-                    width: "100%",
-                    maxWidth: "600px",
-                    height: { xs: "280px", sm: "400px" },
-                    borderRadius: "24px",
-                    overflow: "hidden",
-                    boxShadow: "0px 15px 35px rgba(0, 0, 0, 0.2)",
-                    border: "6px solid #fff",
-                  }}
-                >
-                  <img
-                    src={imagenToritos}
-                    alt="Toritos Emmanuel"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                    }}
-                    onError={(e) => {
-                      e.target.src = "img/toritos1.jpeg";
-                    }}
-                  />
-                </Box>
+              {/* IMÁGENES GRANDES APILADAS */}
+              <Box sx={{ width: "100%", mt: 2 }}>
+                <LargeMediaFrame src={img1} alt="Toritos Especialidad 1" />
+                <LargeMediaFrame src={img2} alt="Toritos Especialidad 2" />
               </Box>
             </Stack>
           </Container>

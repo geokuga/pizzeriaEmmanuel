@@ -6,7 +6,6 @@ import Header from "../components/HeaderMenu";
 import WhatsAppFab from "../components/WhatsAppFab";
 import Footer from "../components/Footer";
 
-// Componente para manejar Imágenes o Videos dinámicamente
 const MediaContent = ({ src, alt }) => {
   const cleanSrc = src.startsWith("/") ? src.substring(1) : src;
   const baseRoute = process.env.PUBLIC_URL || "";
@@ -84,39 +83,55 @@ export const NavButton = ({ label, to }) => (
   </Button>
 );
 
-export const MenuRow = ({ nombre, precio }) => (
-  <Box sx={{ display: "flex", alignItems: "baseline", mb: 0.8 }}>
-    <Typography
-      sx={{
-        fontFamily: "Archivo Black, sans-serif",
-        fontSize: "0.9rem",
-        color: "#fff",
-        textTransform: "uppercase",
-        textShadow: "1px 1px 3px rgba(0,0,0,0.5)",
-      }}
-    >
-      {nombre}
-    </Typography>
-    <Box
-      sx={{
-        flexGrow: 1,
-        borderBottom: "2px dotted rgba(255,255,255,0.6)",
-        mx: 1,
-      }}
-    />
-    <Typography
-      sx={{
-        fontFamily: "Archivo Black, sans-serif",
-        fontSize: "1.1rem",
-        color: "#fff",
-      }}
-    >
-      {precio === "-"
-        ? "-"
-        : precio.toString().startsWith("$")
-          ? precio
-          : `$${precio}`}
-    </Typography>
+export const MenuRow = ({ nombre, precio, subtexto }) => (
+  <Box sx={{ mb: 1.5 }}>
+    <Box sx={{ display: "flex", alignItems: "baseline" }}>
+      <Typography
+        sx={{
+          fontFamily: "Archivo Black, sans-serif",
+          fontSize: "0.95rem",
+          color: "#fff",
+          textTransform: "uppercase",
+          textShadow: "1px 1px 3px rgba(0,0,0,0.5)",
+        }}
+      >
+        {nombre}
+      </Typography>
+      <Box
+        sx={{
+          flexGrow: 1,
+          borderBottom: "2px dotted rgba(255,255,255,0.4)",
+          mx: 1,
+        }}
+      />
+      <Typography
+        sx={{
+          fontFamily: "Archivo Black, sans-serif",
+          fontSize: "1.1rem",
+          color: "#fff",
+        }}
+      >
+        {precio === "-"
+          ? "-"
+          : precio.toString().startsWith("$")
+            ? precio
+            : `$${precio}`}
+      </Typography>
+    </Box>
+    {subtexto && (
+      <Typography
+        sx={{
+          fontFamily: "Archivo, sans-serif",
+          fontSize: "0.72rem",
+          color: "rgba(255, 255, 255, 0.6)", // Sutil para no robar protagonismo
+          mt: -0.2,
+          fontWeight: 500,
+          letterSpacing: "0.5px",
+        }}
+      >
+        {subtexto}
+      </Typography>
+    )}
   </Box>
 );
 
@@ -125,10 +140,10 @@ export const SectionTitle = ({ children }) => (
     sx={{
       fontFamily: "Archivo Black, sans-serif",
       fontStyle: "italic",
-      fontSize: "2rem",
+      fontSize: "2.2rem",
       color: "#fff",
-      mt: 4,
-      mb: 1.5,
+      mt: 5,
+      mb: 2,
       textAlign: "left",
       lineHeight: 1,
       textShadow: "3px 3px 0px rgba(0,0,0,0.2)",
@@ -151,8 +166,8 @@ export default function Menu() {
           pt: 4,
           pb: 2,
           backgroundImage: `
-            radial-gradient(circle at 10% 20%, rgba(244, 121, 32, 0.4) 0%, transparent 40%),
-            radial-gradient(circle at 90% 50%, rgba(244, 121, 32, 0.4) 0%, transparent 40%)
+            radial-gradient(circle at 10% 20%, rgba(244, 121, 32, 0.3) 0%, transparent 40%),
+            radial-gradient(circle at 90% 50%, rgba(244, 121, 32, 0.3) 0%, transparent 40%)
           `,
         }}
       >
@@ -203,13 +218,41 @@ export default function Menu() {
           sx={{ zIndex: 5, px: 3, position: "relative", mb: 5 }}
         >
           <SectionTitle>PIZZAS</SectionTitle>
-          <MenuRow nombre="Mini" precio="70" />
-          <MenuRow nombre="Chica" precio="90" />
-          <MenuRow nombre="Mediana" precio="135" />
-          <MenuRow nombre="Grande" precio="165" />
-          <MenuRow nombre="Familiar" precio="190" />
-          <MenuRow nombre="Olímpica" precio="215" />
-          <MenuRow nombre="Cuadrada" precio="230" />
+          <MenuRow
+            nombre="Mini"
+            precio="70"
+            subtexto="+ Orilla de queso o Queso extra $10"
+          />
+          <MenuRow
+            nombre="Chica"
+            precio="90"
+            subtexto="+ Orilla de queso o Queso extra $15"
+          />
+          <MenuRow
+            nombre="Mediana"
+            precio="135"
+            subtexto="+ Orilla de queso o Queso extra $15"
+          />
+          <MenuRow
+            nombre="Grande"
+            precio="165"
+            subtexto="+ Orilla de queso o Queso extra $20"
+          />
+          <MenuRow
+            nombre="Familiar"
+            precio="190"
+            subtexto="+ Orilla de queso o Queso extra $25"
+          />
+          <MenuRow
+            nombre="Olímpica"
+            precio="215"
+            subtexto="+ Orilla de queso o Queso extra $25"
+          />
+          <MenuRow
+            nombre="Cuadrada"
+            precio="230"
+            subtexto="+ Orilla de queso o Queso extra $30"
+          />
           <MediaContent src="img/pizzas1.jpeg" alt="Pizzas Emmanuel" />
 
           <SectionTitle>EXTRAS</SectionTitle>
@@ -230,7 +273,6 @@ export default function Menu() {
           <MenuRow nombre="Orden (Chica)" precio="100" />
           <MenuRow nombre="Orden (Grande)" precio="180" />
           <MenuRow nombre="Orden (Familiar)" precio="230" />
-          {/* Mantenemos la 'A' mayúscula para Hostinger */}
           <MediaContent src="img/Alitas3.jpeg" alt="Alitas Emmanuel" />
 
           <SectionTitle>BEBIDAS</SectionTitle>
@@ -240,6 +282,8 @@ export default function Menu() {
           <MenuRow nombre="Refresco 500 ML Ret." precio="20" />
           <MenuRow nombre="Coca 2 LT" precio="45" />
           <MenuRow nombre="Sabores 1.5 LT" precio="30" />
+          <MenuRow nombre="Frutsi" precio="15" />
+          <MenuRow nombre="Coca 1.25 LT" precio="35" />
           <MenuRow nombre="Café" precio="-" />
           <MediaContent src="img/aguasFrescas.png" alt="Bebidas" />
         </Container>
